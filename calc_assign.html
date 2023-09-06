@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator-Assignment</title>
+    <style>
+       @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+       *
+       {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+       }
+
+       body
+       {
+        height: 100%;
+        width: 100%;
+        display: flex;  
+        justify-content: center;
+        align-content: center;
+        background-color:  rgb(58, 59, 58);
+        color: #e1e0e0;
+       }
+
+       .main
+       {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20vh;
+        background-color: transparent;
+        width: 50%;
+        padding: 10px;
+       }
+
+        .main div
+        {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 3%;
+            margin-top: 20px;
+         }
+
+        button
+        {
+            text-align: center;
+            padding: 5px 70px;
+            font-size: 1.5vw;
+            border-radius: 10px;
+            border: none;
+           transition: 0.4s;
+           font-weight: 600;
+           margin-top: 40px;
+           color: #c9c7c7;
+           background-color: rgb(58, 59, 58);
+           box-shadow: 0px 0px 9px 6px hsla(120, 1%, 41%, 0.7);
+        }
+
+        button:active
+        {
+            transform: scale(0.93);
+            background-color: #b1aeae;
+            color: #000;
+        }
+
+        .main input
+        {
+            outline: none;
+            border: none;
+            background-color: #756f6f;
+            font-size: 1.5vw;
+            border-radius: 10px;
+            padding: 1px 10px;
+         }
+
+         .main h2
+         {
+            font-weight: 400;
+         }
+
+         .main .fourthChild 
+         {
+            position:  absolute;
+            bottom: 100px;
+
+         }
+
+         .main .fourthChild #Result
+         {
+            pointer-events: none;
+         }
+
+         .main .displayMessage 
+         {
+            position: absolute;
+            top:  50px;
+            left: 35%;
+            font-size: 2vw;
+            color: #ff0000;
+         }
+
+    </style>
+</head>
+<body>
+    <div class="main">
+        <p class="displayMessage"></p>
+         <div class="firstChild">
+            <h2>Enter the first number :</h2> <input type="text" id="inputNum1"  >
+   
+         </div>
+        <div class="secondChild">
+            <h2>Enter the operator :</h2> <input type="text" id="operator"  >
+ 
+        </div>
+        <div class="thirdChild">
+            <h2>Enter the second number :</h2> <input type="text" id="inputNum2"  >
+ 
+        </div>
+        <button>Ans</button>
+        <div class="fourthChild">
+            <h2>Result :</h2> <input type="text" id="Result">   
+        </div>
+    </div>
+</body>
+<script>
+    // Code for calculator.
+
+    let num1 = document.querySelector("#inputNum1")
+    let operator = document.querySelector("#operator")
+    let num2 = document.querySelector("#inputNum2")
+    let result = document.querySelector("#Result")
+    let Ans = document.querySelector("button")
+    let displayMessage = document.querySelector(".displayMessage")
+
+
+     num1.addEventListener("keyup",(e) => {
+        if (isNaN(num1.value)) {
+
+            // For displaying in the console.
+            console.log("Please enter a number");
+
+            // For displaying message on the web page
+            displayMessage.innerHTML = "** Please enter a number"            
+        }
+        if (num1.value === "") {
+
+            displayMessage.innerHTML = ""
+        }
+     })
+
+    //  Statements for checking operators.
+
+    operator.addEventListener("keyup",(e) => {
+        
+        if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "Shift") {
+
+            // For displaying in the console.
+             console.log("Valid key");
+        }else{
+
+            // For displaying in the console.
+            console.log("Please enter a valid operator.");
+
+            // For displaying on our web page.
+            displayMessage.innerHTML = "** Please enter a valid operator."
+        }
+        if (operator.value === "") {
+            displayMessage.innerHTML = ""
+        }      
+    })
+
+
+      num2.addEventListener("keyup",(e) => {
+        if (isNaN(num2.value)) {
+
+            // For displaying in the console.
+            console.log("Please enter a number");
+            
+            // For displaying on our web page.
+          displayMessage.innerHTML = "** Please enter a number"            
+        }
+        if (num2.value === "") {
+            displayMessage.innerHTML = ""
+        }
+        
+     })
+
+     Ans.addEventListener("click",(e) => {
+
+        if (e.button === 0 ) {
+            
+            let string =  `${num1.value} ${operator.value} ${num2.value}`;
+
+            // Evaluating the inputs.
+            result.value  = eval(string);
+
+            // For displaying in the console.
+            console.log(result.value);
+            console.log(string);
+        }
+     })
+</script>
+</html>
