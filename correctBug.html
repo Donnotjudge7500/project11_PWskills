@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correct-Bug</title>
+
+    <!-- CSS -->
+    <style>
+        
+        @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+        *
+        {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        * ::selection
+         {
+            color: #fff;
+            background-color: #000;
+         }
+
+        html,body
+        {
+            width: 100%;
+            height: 100%;
+            background-color: #20b2aa;
+        }
+
+        .main  
+        {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+
+        }
+
+        .main .inputSection 
+        {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+         }
+
+         .main .inputSection .input1
+         {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2%;
+            width: 100%;
+             margin-bottom: 20px;
+         }
+
+         .main .inputSection .input2
+         {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2%;
+            width: 100%;
+          }
+
+        .main .inputSection h1
+        {
+            font-size: 3.4vw;
+            text-transform: capitalize;
+            font-weight: 900;
+            color: transparent;
+            -webkit-text-stroke: 1px  #000;
+        }
+
+        .main .inputSection input
+        {
+            outline: none;
+            border: none;
+            padding: 4px 10px;
+            font-size: 1.7vw;
+            border-radius: 5px ;
+            background-color: #d3d2d2;
+            position: relative;
+            transition: 0.5s;
+        }
+
+         .main .inputSection input:focus
+         {
+            transform: scale(0.9),translateX(-20px);
+         }
+
+        .main .btn
+        {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-top: 20px;
+            gap: 3%;
+         }
+
+         .main .btn button
+         {
+            padding: 10px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.5vw;
+            font-weight: 600;
+            background-color: #a1a1a1;
+            box-shadow: 2px 2px 8px 4px #484848;
+            transition: 0.5s;
+         }
+
+         .main .btn button:active
+         {
+            transform: scale(0.94);
+         }
+
+         #displayMessage 
+         {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 5vw;
+            font-size: 2vw;
+            height: 5vw;
+         }
+    </style>
+</head>
+<body>
+    <div class="main">
+
+        <div class="inputSection">
+
+            <!-- Taking input from the user... -->
+
+             <div class="input1">
+                <h1> Enter the name of item :</h1>
+               <input type="text" id="inputItems1">
+             </div>
+
+              <div class="input2">
+                <h1> Enter the quantity of item :</h1>
+               <input type="text" id="inputItems2">
+             </div>
+        </div>
+
+        <div class="btn">
+             <button id="button1">Add to Cart</button>
+             <button id="button2">Clear The Cart</button>
+        </div>
+
+        <p id="displayMessage"></p>
+    </div>
+</body>
+
+   <!-- ++++++++++++++++++++++++++++++++++++++ -->
+                            <!-- Java Script -->
+    <!-- ++++++++++++++++++++++++++++++++++++++ -->
+
+    <script>
+        // Catching the Elements.
+        
+        const input1 = document.querySelector("#inputItems1")
+        const input2 = document.querySelector("#inputItems2")
+        const button1 = document.querySelector("#button1")
+        const button2 = document.querySelector("#button2")
+        let displayMessage = document.querySelector("#displayMessage")
+ 
+        // Creating Map object.
+        let myMap = new Map();
+
+        // For adding element in the Map object.
+        button1.addEventListener("click",(e) => {
+
+            // Checking some conditions in input section.
+            if (input1.value === '') {
+                displayMessage.innerHTML = "";
+            }
+            else{
+
+                // Inserting the element in the Map object.
+                myMap.set(`    ${input1.value}` , eval(2 * `  ${input2.value}  `));
+
+                // For printing in the console.
+                console.log(myMap);
+                console.log(myMap.get(`${input1.value}`));
+
+                // For displaying on our web page.
+               displayMessage.innerHTML = "Cart items :"+[...myMap];
+
+                // Clearing the input Section.
+               input1.value = "";
+               input2.value = "";
+            }
+            
+           
+         });
+
+        //  For clearing the  elements of the Map object.
+         button2.addEventListener("click",() =>  {
+
+            // Clears the Map .
+            myMap.clear()
+
+            // For displaying in the console.
+            console.log(myMap);
+
+            // For displaying on our web page.
+            displayMessage.innerHTML = "Cart items :"
+         }) 
+    </script>
+</html>
